@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campworks.ai — Your best people should be outside with kids.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1C3347;
+    --bark: #2A5F72;
+    --canvas: #EDF4F7;
+    --cream: #F4F9FB;
+    --gold: #E07840;
+    --sage: #6BA8B4;
+    --smoke: #6B8A96;
+    --dark: #111E28;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(244, 249, 251, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(28, 51, 71, 0.08);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--forest);
+    letter-spacing: -0.02em;
+  }
+
+  .logo span {
+    color: var(--gold);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    color: var(--smoke);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--forest); }
+
+  .nav-cta {
+    background: var(--forest);
+    color: var(--canvas) !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--bark) !important; color: var(--canvas) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(107, 168, 180, 0.14) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(224, 120, 64, 0.07) 0%, transparent 60%);
+  }
+
+  .hero-inner {
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--forest);
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--bark);
+  }
+
+  .hero-sub {
+    font-size: 20px;
+    color: var(--smoke);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 520px;
+    margin-bottom: 48px;
+  }
+
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--forest);
+    color: var(--canvas);
+    padding: 16px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--bark);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    font-size: 14px;
+    color: var(--smoke);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--forest); }
+
+  .btn-secondary::before {
+    content: '→';
+    font-size: 16px;
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 100px 48px;
+  }
+
+  .section-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--forest);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    font-size: 18px;
+    color: var(--smoke);
+    font-weight: 300;
+    max-width: 560px;
+    margin-bottom: 64px;
+    line-height: 1.65;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 80px;
+    opacity: 0.6;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    background: var(--forest);
+    color: var(--canvas);
+  }
+
+  .steps h2 { color: var(--canvas); }
+  .steps .section-sub { color: rgba(237,244,247,0.65); }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-top: 0;
+  }
+
+  .step {
+    border-top: 1px solid rgba(237,244,247,0.15);
+    padding-top: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: rgba(224, 120, 64, 0.28);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .step h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--canvas);
+    margin-bottom: 12px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .step p {
+    font-size: 15px;
+    color: rgba(237,244,247,0.65);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* EXAMPLES */
+  .examples {
+    background: var(--canvas);
+  }
+
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: rgba(28,51,71,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .example-card {
+    background: var(--cream);
+    padding: 40px;
+    transition: background 0.2s;
+  }
+
+  .example-card:hover { background: #e4f0f5; }
+
+  .example-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-bottom: 16px;
+  }
+
+  .example-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--forest);
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+
+  .example-card p {
+    font-size: 15px;
+    color: var(--smoke);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .example-card .result {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(28,51,71,0.1);
+    font-size: 13px;
+    color: var(--bark);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* OFFER */
+  .offer {
+    background: var(--cream);
+  }
+
+  .offer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .offer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .offer-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    font-size: 16px;
+    color: var(--dark);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  .offer-list li::before {
+    content: '—';
+    color: var(--gold);
+    font-weight: 400;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .offer-box {
+    background: var(--forest);
+    color: var(--canvas);
+    padding: 48px;
+    border-radius: 6px;
+    position: sticky;
+    top: 100px;
+  }
+
+  .offer-box .price {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--canvas);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .offer-box .price-sub {
+    font-size: 14px;
+    color: rgba(237,244,247,0.55);
+    font-weight: 300;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .offer-box .btn-primary {
+    width: 100%;
+    text-align: center;
+    background: var(--gold);
+    color: var(--forest);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  .offer-box .btn-primary:hover {
+    background: #b8882a;
+    color: var(--forest);
+  }
+
+  .offer-box .note {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(237,244,247,0.45);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* FIT */
+  .fit {
+    background: var(--forest);
+    color: var(--canvas);
+  }
+
+  .fit h2 { color: var(--canvas); }
+
+  .fit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .fit-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--canvas);
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+
+  .fit-col.not h3 { color: rgba(237,244,247,0.45); }
+
+  .fit-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .fit-list li {
+    display: flex;
+    gap: 14px;
+    font-size: 15px;
+    color: rgba(237,244,247,0.75);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  .fit-col.not .fit-list li {
+    color: rgba(237,244,247,0.35);
+  }
+
+  .fit-list li::before {
+    content: '✓';
+    color: var(--sage);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .fit-col.not .fit-list li::before {
+    content: '×';
+    color: rgba(237,244,247,0.25);
+  }
+
+  /* MISSION */
+  .mission {
+    background: var(--canvas);
+    text-align: center;
+  }
+
+  .mission-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .mission blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 700;
+    color: var(--forest);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+  }
+
+  .mission blockquote em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .mission p {
+    font-size: 17px;
+    color: var(--smoke);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  /* GUIDE */
+  .guide {
+    background: var(--bark);
+    color: var(--canvas);
+    padding: 80px 48px;
+  }
+
+  .guide-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .guide h2 {
+    color: var(--canvas);
+    font-size: clamp(26px, 3vw, 36px);
+    margin-bottom: 16px;
+  }
+
+  .guide p {
+    font-size: 16px;
+    color: rgba(237,244,247,0.65);
+    font-weight: 300;
+    line-height: 1.65;
+    max-width: 480px;
+  }
+
+  .guide .btn-primary {
+    background: var(--canvas);
+    color: var(--bark);
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  .guide .btn-primary:hover {
+    background: var(--cream);
+    transform: translateY(-1px);
+  }
+
+  .kit-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 260px;
+  }
+
+  .kit-form input[type="email"] {
+    padding: 13px 16px;
+    border-radius: 4px;
+    border: none;
+    background: rgba(237,244,247,0.15);
+    color: var(--canvas);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    border: 1px solid rgba(237,244,247,0.25);
+    transition: border-color 0.2s;
+  }
+
+  .kit-form input[type="email"]::placeholder {
+    color: rgba(237,244,247,0.45);
+  }
+
+  .kit-form input[type="email"]:focus {
+    border-color: rgba(237,244,247,0.55);
+  }
+
+  .kit-form button {
+    padding: 13px 24px;
+    background: var(--canvas);
+    color: var(--bark);
+    border: none;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .kit-form button:hover {
+    background: var(--cream);
+    transform: translateY(-1px);
+  }
+
+  /* FOOTER CTA */
+  .footer-cta {
+    background: var(--cream);
+    text-align: center;
+    padding: 100px 48px;
+  }
+
+  .footer-cta h2 {
+    font-size: clamp(32px, 4vw, 52px);
+    margin-bottom: 16px;
+  }
+
+  .footer-cta p {
+    font-size: 18px;
+    color: var(--smoke);
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--forest);
+    color: rgba(245,240,232,0.45);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  footer .logo { font-size: 18px; color: var(--canvas); }
+
+  footer a {
+    color: rgba(245,240,232,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--canvas); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    section { padding: 72px 24px; }
+    .hero { padding: 100px 24px 72px; }
+    .steps-grid { grid-template-columns: 1fr; gap: 36px; }
+    .examples-grid { grid-template-columns: 1fr; }
+    .offer-inner { grid-template-columns: 1fr; gap: 48px; }
+    .offer-box { position: static; }
+    .fit-grid { grid-template-columns: 1fr; }
+    .guide-inner { grid-template-columns: 1fr; gap: 32px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Camp<span>works</span></div>
+  <ul>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#examples">What camps do</a></li>
+    <li><a href="#offer">The offer</a></li>
+    <li><a href="#qualify" class="nav-cta">See if you qualify</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">Campworks.ai</p>
+    <h1>Your best people should be <em>outside with kids.</em></h1>
+    <p class="hero-sub">We help camp teams get the scheduling, logistics, and admin off their plates. So great camp people can actually do camp.</p>
+    <div class="cta-group">
+      <a href="#qualify" class="btn-primary">See if your camp qualifies — free 30-min call</a>
+      <a href="#guide" class="btn-secondary">Not ready? Get the free Claude setup guide for camps.</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps" id="how-it-works">
+  <div class="section-inner">
+    <p class="section-label">How it works</p>
+    <h2>Three steps. Your team does the work. We make sure it sticks.</h2>
+    <p class="section-sub">This isn't a product you buy and figure out later. It's a conversation — with your team, about the work they actually do.</p>
+    <div class="steps-grid">
+      <div class="step animate">
+        <div class="step-num">01</div>
+        <h3>The qualifying call</h3>
+        <p>30 minutes, free. We listen to what your team does, where the friction is, and whether there's a fit. No pitch. Just questions.</p>
+      </div>
+      <div class="step animate" style="animation-delay:0.1s">
+        <div class="step-num">02</div>
+        <h3>The team session</h3>
+        <p>We work through your team's actual tasks — one by one — and leave each person with a specific plan for the work that's eating their time, plus the tools already set up and running.</p>
+      </div>
+      <div class="step animate" style="animation-delay:0.2s">
+        <div class="step-num">03</div>
+        <h3>The handoff</h3>
+        <p>A personalized playbook for each staff member. A camp-wide playbook for your organization. Everything built, everything yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLES -->
+<section class="examples" id="examples">
+  <div class="section-inner">
+    <p class="section-label">What camps are doing with this</p>
+    <h2>Just some examples.</h2>
+    <p class="section-sub">These aren't demos we prepared. They're things that happened with real camp teams in the first hour of working together.</p>
+    <div class="examples-grid">
+      <div class="example-card animate">
+        <span class="example-tag">Scheduling</span>
+        <h3>Full summer schedule, every constraint, built in hours not days.</h3>
+        <p>Every team, every field, every rule — handled. The person who used to spend weeks on this watched it happen in real time.</p>
+        <p class="result">Used to take weeks.</p>
+      </div>
+      <div class="example-card animate">
+        <span class="example-tag">Operations</span>
+        <h3>Complete website audit, every fix made automatically.</h3>
+        <p>Every typo found, every outdated page flagged — and every correction made without touching a single line of code.</p>
+        <p class="result">A task that was quietly never getting done.</p>
+      </div>
+      <div class="example-card animate">
+        <span class="example-tag">Logistics</span>
+        <h3>Bus schedule built by the person who runs transportation.</h3>
+        <p>In her own words. The first time she ever tried. She didn't ask for help — she just started talking to it and it worked.</p>
+        <p class="result">Her idea. Her system. She owns it.</p>
+      </div>
+      <div class="example-card animate">
+        <span class="example-tag">Communications</span>
+        <h3>Staff outreach drafted in the right tone, for the right person.</h3>
+        <p>So the program director spends that time building the program — not staring at a blank message wondering how to say the thing.</p>
+        <p class="result">More time doing the actual job.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer" id="offer">
+  <div class="offer-inner">
+    <div>
+      <p class="section-label">The offer</p>
+      <h2>One engagement. A playbook your team actually uses.</h2>
+      <p class="section-sub" style="margin-bottom: 40px;">You're not paying for hours. You're paying for a camp that runs a little smoother, a team that feels a little less stuck, and a director who stops being the bottleneck every time something needs to change.</p>
+      <ul class="offer-list">
+        <li>A personalized plan for each team member, built around their specific job</li>
+        <li>A camp-wide playbook for how your organization uses these tools</li>
+        <li>Everything set up and connected before we leave</li>
+        <li>A prioritized list of the next things worth tackling</li>
+      </ul>
+    </div>
+    <div class="offer-box animate" id="qualify">
+      <div class="price">$2,000</div>
+      <p class="price-sub">Teams of up to five.<br>Larger teams, reach out for pricing.</p>
+      <a href="#" class="btn-primary">Book a free qualifying call</a>
+      <p class="note">The qualifying call is free. We'll tell you honestly if there's a fit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FIT -->
+<section class="fit">
+  <div class="section-inner">
+    <p class="section-label">Who it's for</p>
+    <h2>This works if you're open to it.</h2>
+    <p class="section-sub" style="color: rgba(237,244,247,0.55);">That's the only real requirement. We've done this with teams who had never opened one of these tools before.</p>
+    <div class="fit-grid">
+      <div class="fit-col">
+        <h3>You'll get a lot from this if...</h3>
+        <ul class="fit-list">
+          <li>Your team is stretched thin and wearing hats that don't quite fit</li>
+          <li>You want your best people doing more of the work they're actually good at</li>
+          <li>You're open to spending two hours upfront to get a lot of time back</li>
+        </ul>
+      </div>
+      <div class="fit-col not">
+        <h3>This probably isn't for you if...</h3>
+        <ul class="fit-list">
+          <li>You want a hands-off solution that runs without anyone learning anything</li>
+          <li>You're looking for a one-size-fits-all product</li>
+          <li>You think your team is already doing everything they could be doing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission">
+  <div class="mission-inner animate">
+    <p class="section-label">Why this matters</p>
+    <blockquote>"Camp changes kids. That's why you're <em>doing this.</em>"</blockquote>
+    <p>The scheduling, the logistics, the admin — that's not why anyone got into camp. But it's where so many hours go.</p>
+    <p>Getting that work off your team's plate isn't just about efficiency. It's more time outside. More conversations that actually go somewhere. More of the camp you love.</p>
+  </div>
+</section>
+
+<!-- GUIDE -->
+<section class="guide" id="guide">
+  <div class="guide-inner">
+    <div>
+      <h2>The Claude Setup Guide for Camps</h2>
+      <p>The first things every camp team should have running, and how to get there in an afternoon. Specific, step-by-step, built for people who have never done this before.</p>
+    </div>
+    <div class="kit-form">
+      <form action="https://app.kit.com/forms/YOUR_FORM_ID/subscriptions" method="post" target="_blank">
+        <input type="email" name="email_address" placeholder="Your email address" required />
+        <button type="submit">Get the Guide</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <div class="section-inner" style="text-align: center">
+    <p class="section-label">Ready to talk</p>
+    <h2>Your team is good at camp.</h2>
+    <p>Let's make sure the rest isn't in the way.</p>
+    <div style="display:flex; gap:20px; justify-content:center; align-items:center; flex-wrap:wrap">
+      <a href="#qualify" class="btn-primary">Book a free qualifying call</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Camp<span style="color:var(--gold)">works</span></div>
+  <div>campworks.ai</div>
+  <div style="display:flex; gap:24px">
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav ul a[href^="#"]');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 120) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--forest)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
