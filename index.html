@@ -104,35 +104,11 @@
       radial-gradient(ellipse 40% 60% at 20% 80%, rgba(224, 120, 64, 0.07) 0%, transparent 60%);
   }
 
-  .hero-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-    width: 100%;
-  }
-
   .hero-inner {
     max-width: 680px;
     position: relative;
     z-index: 1;
     animation: fadeUp 0.8s ease both;
-  }
-
-  .hero-image {
-    animation: fadeUp 0.8s ease 0.2s both;
-  }
-
-  .hero-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    aspect-ratio: 4/3;
   }
 
   .eyebrow {
@@ -702,8 +678,6 @@
     nav ul { display: none; }
     section { padding: 72px 24px; }
     .hero { padding: 100px 24px 72px; }
-    .hero-layout { grid-template-columns: 1fr; gap: 40px; }
-    .hero-image { order: -1; }
     .steps-grid { grid-template-columns: 1fr; gap: 36px; }
     .examples-grid { grid-template-columns: 1fr; }
     .offer-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -730,18 +704,13 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-layout">
-    <div class="hero-inner">
-      <p class="eyebrow">Campwork.ai</p>
-      <h1>Your best people should be <em>outside with kids.</em></h1>
-      <p class="hero-sub">We help camp teams get the scheduling, logistics, and admin off their plates. So great camp people can actually do camp.</p>
-      <div class="cta-group">
-        <a href="https://tidycal.com/dougnorrie/30-minute-meeting" class="btn-primary" target="_blank">See if your camp qualifies. Free 30-min call.</a>
-        <a href="#guide" class="btn-secondary">Not ready? Get The Camp Pro's Claude Quick-Start Guide free.</a>
-      </div>
-    </div>
-    <div class="hero-image">
-      <img src="fire.png" alt="Campfire gathering at summer camp" />
+  <div class="hero-inner">
+    <p class="eyebrow">Campwork.ai</p>
+    <h1>Your best people should be <em>outside with kids.</em></h1>
+    <p class="hero-sub">We help camp teams get the scheduling, logistics, and admin off their plates. So great camp people can actually do camp.</p>
+    <div class="cta-group">
+      <a href="https://tidycal.com/dougnorrie/30-minute-meeting" class="btn-primary" target="_blank">See if your camp qualifies. Free 30-min call.</a>
+      <a href="#guide" class="btn-secondary">Not ready? Get The Camp Pro's Claude Quick-Start Guide free.</a>
     </div>
   </div>
 </section>
